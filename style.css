@@ -1,10 +1,30 @@
-.page { display: none; }
-.page.active { display: block; }
+/* Page visibility */
+.page {
+    display: none;
+}
 
-body.not-authenticated .role-logged-in { display: none; }
-body.authenticated .role-logged-out { display: none; }
+.page.active {
+    display: block;
+}
 
-.role-admin { display: none; }
-body.is-admin .role-admin { display: block; }
+/* Role-based visibility */
+body.not-authenticated .role-logged-in {
+    display: none !important;
+}
 
-input, button { margin: 5px 0; padding: 5px; }
+body.authenticated .role-logged-out {
+    display: none !important;
+}
+
+.role-admin {
+    display: none !important;
+}
+
+body.is-admin .role-admin {
+    display: block !important;
+}
+
+/* For dropdown items in admin section */
+body.is-admin .role-admin.dropdown-item {
+    display: block !important;
+}
