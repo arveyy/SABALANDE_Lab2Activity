@@ -1,0 +1,110 @@
+<body class="not-authenticated">
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#/">Full-Stack App (Arvy Sabalande)</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <!-- Not logged in -->
+          <li class="nav-item role-logged-out">
+            <a class="nav-link" href="#/login">Login</a>
+          </li>
+          <li class="nav-item role-logged-out">
+            <a class="nav-link" href="#/register">Register</a>
+          </li>
+
+          <!-- Logged in dropdown -->
+          <li class="nav-item dropdown role-logged-in">
+            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+              <span id="usernameDisplay">User</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#/profile">Profile</a></li>
+              <li><a class="dropdown-item" href="#/requests">My Requests</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+          </li>
+
+          <!-- Admin-only -->
+          <li class="nav-item role-admin">
+            <a class="nav-link" href="#/employees">Employees</a>
+          </li>
+          <li class="nav-item role-admin">
+            <a class="nav-link" href="#/accounts">Accounts</a>
+          </li>
+          <li class="nav-item role-admin">
+            <a class="nav-link" href="#/departments">Departments</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container mt-4">
+    <!-- Pages -->
+    <section id="home-page" class="page active">
+      <h2>Home</h2>
+      <p>Welcome to the Full-Stack App prototype.</p>
+    </section>
+
+    <section id="register-page" class="page">
+      <h2>Register</h2>
+      <form id="registerForm">
+        <input type="text" id="firstName" placeholder="First Name" required><br>
+        <input type="text" id="lastName" placeholder="Last Name" required><br>
+        <input type="email" id="regEmail" placeholder="Email" required><br>
+        <input type="password" id="regPassword" placeholder="Password" required><br>
+        <button type="submit">Register</button>
+      </form>
+    </section>
+
+    <section id="verify-email-page" class="page">
+      <h2>Verify Email</h2>
+      <p id="verifyMsg"></p>
+      <button id="simulateVerifyBtn">✅ Simulate Email Verification</button>
+    </section>
+
+    <section id="login-page" class="page">
+      <h2>Login</h2>
+      <form id="loginForm">
+        <input type="email" id="loginEmail" placeholder="Email" required><br>
+        <input type="password" id="loginPassword" placeholder="Password" required><br>
+        <button type="submit">Login</button>
+      </form>
+    </section>
+
+    <section id="profile-page" class="page">
+      <h2>Profile</h2>
+      <div id="profileContent"></div>
+    </section>
+
+    <section id="employees-page" class="page">
+      <h2>Employees (Admin)</h2>
+      <div id="employeesTable"></div>
+    </section>
+
+    <section id="departments-page" class="page">
+      <h2>Departments (Admin)</h2>
+      <div id="departmentsTable"></div>
+    </section>
+
+    <section id="accounts-page" class="page">
+      <h2>Accounts (Admin)</h2>
+      <div id="accountsTable"></div>
+    </section>
+
+    <section id="requests-page" class="page">
+      <h2>My Requests</h2>
+      <div id="requestsTable"></div>
+      <button id="newRequestBtn">+ New Request</button>
+    </section>
+  </main>
+
+</body>
