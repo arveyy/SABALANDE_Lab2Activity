@@ -876,8 +876,7 @@ function init() {
     // Hash change listener
     window.addEventListener('hashchange', handleRouting);
 }
-
-// Start the app
+// Starter
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
 } else {
