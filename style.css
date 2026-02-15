@@ -694,7 +694,7 @@ textarea.form-control {
     color: #17a2b8;
 }
 
-/* Responsive */
+/*Responsive*/
 @media (max-width: 768px) {
     .nav-container {
         flex-direction: column;
