@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - Full-Stack App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="brand">Full-Stack App</div>
+    <div class="nav-links">
+        <span id="userWelcome"></span>
+        <a href="#" onclick="logout()">Logout</a>
+    </div>
+</nav>
+
+<div class="container">
+    <h1>Dashboard</h1>
+    <div class="note-box" style="background:#dff0d8; border-color:#b2dba1; color:#3c763d;">
+        ✅ Welcome! You are successfully logged in.
+    </div>
+    
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <h3>Employees</h3>
+            <p>Manage employee records</p>
+            <button class="btn-primary" onclick="showSection('employees')">View Employees</button>
+        </div>
+        
+        <div class="dashboard-card">
+            <h3>Departments</h3>
+            <p>Manage departments</p>
+            <button class="btn-primary" onclick="showSection('departments')">View Departments</button>
+        </div>
+        
+        <div class="dashboard-card">
+            <h3>Requests</h3>
+            <p>Handle user requests</p>
+            <button class="btn-primary" onclick="showSection('requests')">View Requests</button>
+        </div>
+    </div>
+
+    <!-- Employees Section -->
+    <div id="employeesSection" class="section" style="display:none;">
+        <h2>Employees Management</h2>
+        <button class="btn-primary" onclick="showAddForm('employee')">Add Employee</button>
+        <div id="employeesList"></div>
+        
+        <div id="addEmployeeForm" class="form-section" style="display:none;">
+            <h3>Add Employee</h3>
+            <label>Name</label>
+            <input type="text" id="empName" class="input" />
+            <label>Position</label>
+            <input type="text" id="empPosition" class="input" />
+            <label>Department</label>
+            <input type="text" id="empDepartment" class="input" />
+            <div style="margin-top:15px;">
+                <button class="btn-primary" onclick="addEmployee()">Add</button>
+                <button class="btn-cancel" onclick="hideAddForm('employee')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Departments Section -->
+    <div id="departmentsSection" class="section" style="display:none;">
+        <h2>Departments Management</h2>
+        <button class="btn-primary" onclick="showAddForm('department')">Add Department</button>
+        <div id="departmentsList"></div>
+        
+        <div id="addDepartmentForm" class="form-section" style="display:none;">
+            <h3>Add Department</h3>
+            <label>Department Name</label>
+            <input type="text" id="deptName" class="input" />
+            <label>Manager</label>
+            <input type="text" id="deptManager" class="input" />
+            <div style="margin-top:15px;">
+                <button class="btn-primary" onclick="addDepartment()">Add</button>
+                <button class="btn-cancel" onclick="hideAddForm('department')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Requests Section -->
+    <div id="requestsSection" class="section" style="display:none;">
+        <h2>Requests Management</h2>
+        <button class="btn-primary" onclick="showAddForm('request')">Add Request</button>
+        <div id="requestsList"></div>
+        
+        <div id="addRequestForm" class="form-section" style="display:none;">
+            <h3>Add Request</h3>
+            <label>Title</label>
+            <input type="text" id="reqTitle" class="input" />
+            <label>Description</label>
+            <textarea id="reqDescription" class="input" rows="3"></textarea>
+            <label>Priority</label>
+            <select id="reqPriority" class="input">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+            <div style="margin-top:15px;">
+                <button class="btn-primary" onclick="addRequest()">Add</button>
+                <button class="btn-cancel" onclick="hideAddForm('request')">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>

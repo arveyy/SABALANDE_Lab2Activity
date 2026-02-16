@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Verify Email</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<nav class="navbar">
+    <div class="brand">Full-Stack App</div>
+</nav>
+
+<div class="container">
+    <h2>Verify Your Email</h2>
+    <div class="note-box" style="background:#dff0d8; border-color:#b2dba1; color:#3c763d;">
+        ✅ A verification link has been sent to <span id="verifyEmail"></span>.
+    </div>
+    <p>For demo purposes, click below to simulate verification:</p>
+    <button class="btn-primary" onclick="simulateVerify()">Simulate Email Verification</button>
+    <button class="btn-cancel" onclick="location.href='login.html'">Go to Login</button>
+</div>
+
+<script src="auth.js"></script>
+</body>
+</html>
