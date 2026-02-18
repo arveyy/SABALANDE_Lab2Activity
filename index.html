@@ -36,7 +36,7 @@
                 </div>
 
                 <hr>
-                <a href="#" onclick="logout()">Logout</a>
+                <a href="#" onclick="logout()" style="color:red;">Logout</a>
             </div>
         </div>
 
@@ -45,7 +45,7 @@
 
 <div class="container">
 
-    <!-- WELCOME PAGE -->
+    <!-- HOME -->
     <div id="welcome-page" class="page">
         <h1>Welcome to Full-Stack App</h1>
         <p>A static prototype before backend integration. Simulates:</p>
@@ -55,19 +55,24 @@
             <li>Role-based UI (Admin/User)</li>
             <li>CRUD for Employees, Departments, Requests</li>
         </ul>
-        <p><strong>Note:</strong> All data is stored in <code>localStorage</code>. Refresh to reset.</p>
+        <div class="note-warning">
+            <strong>Note:</strong> All data is stored in <code>localStorage</code>. Refresh to reset.
+        </div>
         <button class="btn-primary" onclick="navigateTo('#/register')">Get Started →</button>
     </div>
 
-    <!-- LOGIN PAGE -->
+    <!-- LOGIN -->
     <div id="login-page" class="page">
+        <div id="verificationSuccess" class="alert-success" style="display:none;">
+            ✅ Email verified! You may now log in.
+        </div>
         <h2>Login</h2>
         <input type="email" id="loginEmail" class="input" placeholder="Email">
         <input type="password" id="loginPassword" class="input" placeholder="Password">
         <button class="btn-primary" onclick="login()">Login</button>
     </div>
 
-    <!-- REGISTER PAGE -->
+    <!-- REGISTER -->
     <div id="register-page" class="page">
         <h2>Register</h2>
         <input type="text" id="firstName" class="input" placeholder="First Name">
@@ -77,36 +82,189 @@
         <button class="btn-primary" onclick="register()">Register</button>
     </div>
 
-    <!-- PROFILE PAGE -->
+    <!-- VERIFY -->
+    <div id="verify-page" class="page">
+        <h2>Verify Your Email</h2>
+        <div class="alert-success">
+            ✅ A verification link has been sent to <span id="verifyEmailText"></span>.
+        </div>
+        <p>For demo purposes, click below to simulate verification:</p>
+        <button class="btn-success" onclick="simulateVerification()">✅ Simulate Email Verification</button>
+        <button class="btn-secondary" onclick="navigateTo('#/login')">Go to Login</button>
+    </div>
+
+    <!-- PROFILE -->
     <div id="profile-page" class="page">
         <h2>Profile</h2>
         <div id="profileContent"></div>
     </div>
 
-    <!-- ACCOUNTS PAGE -->
-    <div id="accounts-page" class="page">
-        <h2>Accounts</h2>
-        <div id="accountsList"></div>
-    </div>
-
-    <!-- DEPARTMENTS PAGE -->
-    <div id="departments-page" class="page">
-        <h2>Departments</h2>
-        <div id="departmentsList"></div>
-    </div>
-
-    <!-- EMPLOYEES PAGE -->
+    <!-- EMPLOYEES -->
     <div id="employees-page" class="page">
-        <h2>Employees</h2>
-        <div id="employeesList"></div>
+        <div class="page-title-row">
+            <h2>Employees</h2>
+            <button class="btn-success" onclick="showEmployeeForm()">+ Add Employee</button>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Dept</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="employeeTableBody"></tbody>
+        </table>
+
+        <div id="employeeForm" class="form-card" style="display:none;">
+            <div class="form-card-title">Add/Edit Employee</div>
+            <label class="form-label">Employee ID</label>
+            <input type="text" id="empId" class="input">
+            <label class="form-label">User Email</label>
+            <input type="email" id="empEmail" class="input">
+            <label class="form-label">Position</label>
+            <input type="text" id="empPosition" class="input">
+            <label class="form-label">Department</label>
+            <select id="empDept" class="input"></select>
+            <label class="form-label">Hire Date</label>
+            <input type="date" id="empHireDate" class="input" placeholder="mm/dd/yyyy">
+            <div>
+                <button class="btn-primary" onclick="saveEmployee()">Save</button>
+                <button class="btn-cancel" onclick="cancelEmployeeForm()">Cancel</button>
+            </div>
+        </div>
     </div>
 
-    <!-- MY REQUESTS PAGE -->
+    <!-- DEPARTMENTS -->
+    <div id="departments-page" class="page">
+        <div class="page-title-row">
+            <h2>Departments</h2>
+            <button class="btn-success" onclick="showDeptForm()">+ Add Department</button>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="deptTableBody"></tbody>
+        </table>
+
+        <div id="deptForm" class="form-card" style="display:none;">
+            <div class="form-card-title">Add/Edit Department</div>
+            <label class="form-label">Name</label>
+            <input type="text" id="deptName" class="input">
+            <label class="form-label">Description</label>
+            <input type="text" id="deptDesc" class="input">
+            <div>
+                <button class="btn-primary" onclick="saveDepartment()">Save</button>
+                <button class="btn-cancel" onclick="cancelDeptForm()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ACCOUNTS -->
+    <div id="accounts-page" class="page">
+        <div class="page-title-row">
+            <h2>Accounts</h2>
+            <button class="btn-success" onclick="showAccountForm()">+ Add Account</button>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Verified</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="accountTableBody"></tbody>
+        </table>
+
+        <div id="accountForm" class="form-card" style="display:none;">
+            <div class="form-card-title">Add/Edit Account</div>
+            <label class="form-label">First Name</label>
+            <input type="text" id="accFirst" class="input">
+            <label class="form-label">Last Name</label>
+            <input type="text" id="accLast" class="input">
+            <label class="form-label">Email</label>
+            <input type="email" id="accEmail" class="input">
+            <label class="form-label">Password</label>
+            <input type="password" id="accPassword" class="input">
+            <label class="form-label">Role</label>
+            <select id="accRole" class="input">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+            </select>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:15px;">
+                <input type="checkbox" id="accVerified">
+                <label for="accVerified" style="font-size:14px;">Verified</label>
+            </div>
+            <div>
+                <button class="btn-primary" onclick="saveAccount()">Save</button>
+                <button class="btn-cancel" onclick="cancelAccountForm()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MY REQUESTS -->
     <div id="my-requests-page" class="page">
-        <h2>My Requests</h2>
+        <div class="page-title-row">
+            <h2>My Requests</h2>
+            <button class="btn-success" onclick="openNewRequestModal()">+ New Request</button>
+        </div>
         <div id="myRequestsList"></div>
     </div>
 
+</div>
+
+<!-- EDIT PROFILE MODAL -->
+<div id="editProfileModal" class="modal-overlay">
+    <div class="modal-box">
+        <div class="modal-head">
+            <h3>Edit Profile</h3>
+            <button class="modal-x" onclick="closeEditProfileModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <label class="modal-lbl">First Name</label>
+            <input type="text" id="editFirstName" class="input">
+            <label class="modal-lbl">Last Name</label>
+            <input type="text" id="editLastName" class="input">
+            <label class="modal-lbl">Email</label>
+            <input type="email" id="editEmail" class="input">
+        </div>
+        <div class="modal-foot">
+            <button class="btn-primary" onclick="saveProfile()">Save Changes</button>
+            <button class="btn-cancel" onclick="closeEditProfileModal()">Cancel</button>
+        </div>
+    </div>
+</div>
+
+<!-- NEW REQUEST MODAL -->
+<div id="newRequestModal" class="modal-overlay">
+    <div class="modal-box">
+        <div class="modal-head">
+            <h3>New Request</h3>
+            <button class="modal-x" onclick="closeNewRequestModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <label class="modal-lbl">Type</label>
+            <input type="text" id="requestType" class="input" placeholder="Equipment">
+            <label class="modal-lbl">Items</label>
+            <div id="requestItemsList"></div>
+        </div>
+        <div class="modal-foot">
+            <button class="btn-primary" onclick="submitRequest()">Submit Request</button>
+        </div>
+    </div>
 </div>
 
 <script src="storage.js"></script>

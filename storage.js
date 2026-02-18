@@ -10,8 +10,8 @@ function loadFromStorage() {
                 { first: "Admin", last: "User", email: "admin@example.com", password: "Password123!", role: "admin", verified: true }
             ],
             departments: [
-                { id: 1, name: "Engineering" },
-                { id: 2, name: "HR" }
+                { id: 1, name: "Engineering", description: "Software team" },
+                { id: 2, name: "HR", description: "Human Resources" }
             ],
             employees: [],
             requests: []
@@ -21,6 +21,14 @@ function loadFromStorage() {
     }
 
     window.db = JSON.parse(raw);
+
+    // migrate: ensure departments have description field
+    if (window.db.departments) {
+        window.db.departments = window.db.departments.map(d => ({
+            description: "",
+            ...d
+        }));
+    }
 }
 
 function saveToStorage() {
